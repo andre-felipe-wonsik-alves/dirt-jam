@@ -177,15 +177,12 @@ vec4 exponential_squared_fog(vec3 world_pos, vec4 color) {
 	if (_FogDensity <= 0.0) {
 		return color;
 	}
-
+	
 	float distance = length(world_pos - _CameraPos);
 	float fog_factor = 1.0 / (exp(distance * _FogDensity) * exp(distance * _FogDensity));
 	fog_factor = clamp(fog_factor, 0.0, 1.0);
 	
-	frag_color = vec4(1.0, 0.0, 0.0, 1.0); 
-	return frag_color;
-
-	// return mix(_FogColor, color, fog_factor);
+	return mix(_FogColor, color, fog_factor);
 }
 
 void main() {
@@ -217,8 +214,8 @@ void main() {
 	// Combine lighting values, clip to prevent pixel values greater than 1 which would really really mess up the gamma correction below
 	vec4 lit = clamp(direct_light + ambient_light, vec4(0), vec4(1));
 	vec4 final_color = pow(lit, vec4(2.2));
-	frag_color = exponential_squared_fog(world_position, final_color);
+	vec4 fog = exponential_squared_fog(world_position, final_color);
 
 	// Convert from linear rgb to srgb for proper color output, ideally you'd do this as some final post processing effect because otherwise you will need to revert this gamma correction elsewhere
-	//frag_color = pow(lit, vec4(2.2));
+	frag_color = pow(fog, vec4(1.0 / 2.2));
 }

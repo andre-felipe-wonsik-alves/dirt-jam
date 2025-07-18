@@ -42,7 +42,7 @@ low_slope_color = Color(0.366477, 0.373384, 0.0777902, 1)
 high_slope_color = Color(0.1, 0.05835, 0.049, 1)
 ambient_light = Color(0.192, 0.2712, 0.3, 1)
 fog_density = 1.0
-fog_color = Color(0, 0.795743, 0.70278, 1)
+fog_color = Color(0, 0.429585, 0.0982404, 1)
 metadata/_custom_type_script = "uid://7n58awc2ols0"
 
 [sub_resource type="Compositor" id="Compositor_1i1cu"]
